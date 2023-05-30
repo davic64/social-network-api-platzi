@@ -10,6 +10,6 @@ app.use("/", router);
 
 app.listen(config.mysqlService.port, () => {
   console.log(
-    `🚀 MySQL Server running on http://localhost:${config.mysqlService.port}`
+    `🚀 MySQL Server running on http://${config.mysqlService.host}:${config.mysqlService.port}`
   );
 });

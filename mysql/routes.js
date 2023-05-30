@@ -11,7 +11,7 @@ const list = async (req, res, next) => {
 };
 
 const get = async (req, res, next) => {
-  const data = await Store.list(req.params.table, req.params.id);
+  const data = await Store.get(req.params.table, req.params.id);
   response.success(res, data, 200);
 };
 const upsert = async (req, res, next) => {
