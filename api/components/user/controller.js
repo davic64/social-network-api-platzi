@@ -2,11 +2,18 @@ const auth = require("../auth");
 
 const TABLE = "user";
 
-module.exports = (injectedStore) => {
+module.exports = (injectedStore, injectedCache) => {
+  let cache = injectedCache || require("../../../store/dummy");
   let store = injectedStore || require("../../../store/dummy");
 
-  const list = () => {
-    return store.list(TABLE);
+  const list = async () => {
+    let users = await cache.list(TABLE);
+    if (!users) {
+      users = await store.list(TABLE);
+      cache.upsert(TABLA, users);
+    }
+
+    return users;
   };
 
   const get = (id) => {
